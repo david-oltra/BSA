@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+	<meta charset="UTF-8">
+	<title>BARCO SOLAR AUTONOMO</title>
+    <link rel="icon" href="images/5768599.ico">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+	
+	<style> 
+
+  	#map {
+   	    width: 100%;
+  	    height: 100vh;
+          z-index: 0    ;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Ubuntu;
+    }
+    #title{
+        position: absolute;
+        top: 10;
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
+        background-color:rgba(100, 100, 100, 0.5);
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
+        text-decoration-line: overline underline;
+        z-index: 1;
+    }
+
+</style> 
+</head>  
+	<body>
+            <div id="title">
+                <h1>BARCO SOLAR AUTONOMO</h1>
+            </div>
+        
+            <div id ="map"> </div> 
+        <script>
+            var lat = 38.3823434;
+            var long = -0.2067568;
+            var map = L.map('map').setView([lat,long], 10);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        
+            var boat = L.icon({
+                iconUrl: 'images/5768599.png',
+
+                iconSize:     [45, 45], // size of the icon
+});
+
+
+            var marker = L.marker([lat,long], {icon: boat}).addTo(map);
+
+            marker.bindPopup("<b>¡Estoy aquí!</b><br>"+long+"<br>"+lat).openPopup();
+
+            // omnivore.gpx('frances-21-astorga-foncebadon.gpx').addTo(map);
+            
+
+        </script>
+	</body> 
+</html>
