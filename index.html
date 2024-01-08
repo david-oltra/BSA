@@ -20,6 +20,135 @@
 
 
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Ubuntu;
+        }
+
+        .intro{
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .sky{
+            position: absolute;
+            width: 100%;
+            height: 40vh;
+            background: linear-gradient(to bottom, #037ccb 0%, #82ccef 100%);
+        }
+        .cloud {
+            width: 250px; 
+            height: 80px;
+            background: linear-gradient(to bottom, #FFF 5%, #BFF 100%);
+            top: 50px; left: 50px;
+            border-radius: 100px;
+            position: absolute;
+            margin: 120px auto 20px;
+            left:200px;
+            animation: cloud linear 51s infinite alternate;    
+        }
+        .cloud:after, .cloud:before {
+            content: '';
+            position: absolute;
+            background: linear-gradient(to bottom, white 0%, white 50%, transparent 51%);
+            z-index: 0;
+        }
+        .cloud:after {
+            width: 75px; height: 75px;
+            top: -30px; left: 40px;
+            border-radius: 100px;
+        }
+        .cloud:before {
+            width: 100px; height: 100px;
+            top: -50px; right: 50px;
+            border-radius: 200px;
+        }
+        .sea{
+            position: absolute;
+            width: 100%;
+            height: 30vh;
+            background: linear-gradient(to bottom, rgba(8, 122, 192, 1) 0%, 
+                                                    rgba(18, 156, 192, 1) 25%,
+                                                    rgba(42, 212, 229, 1) 50%,
+                                                    rgba(150, 233, 239, 1) 75%,
+                                                    rgba(222, 236, 211, 1) 100%
+                                                    );
+            border-radius: 0 0 20% 20%;
+            animation: wave ease-in-out 2s infinite alternate;
+            transform-origin: 50% 0%;
+            overflow: hidden;
+            top:40vh;
+        }
+        .seafoam{
+            position: absolute;
+            width: 100%;
+            height: 30vh;
+            background: linear-gradient(to bottom, transparent 0%, transparent 80%, white 100%);
+
+        }
+        .sand{
+            position: absolute;
+            width: 100%;
+            height: 40vh;
+            background: #f1dfd7;
+            top:60vh; 
+            z-index: -10;
+        }
+        .boat{
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: no-repeat url("./images/5768599.png");
+            background-size: contain;
+            top: 30vh;
+            left: 50%;
+            animation: boat linear 10s infinite alternate;
+        }
+        @keyframes wave{
+            0%{
+                transform: scaleY(1);
+            }
+            100%{
+                transform: scaleY(1.1);
+            }
+        }
+        @keyframes boat{
+            0%{
+                transform: translate3d(0%,0%,0);
+            }
+            25%{
+                transform: translate3d(-25%,2%,0);
+            }
+            50%{
+                transform: translate3d(-50%,0%,0);
+            }
+            75%{
+                transform: translate3d(-75%,2%,0);
+            }
+            100%{
+                transform: translate3d(-100%,0%,0);
+            }
+        }
+        @keyframes cloud{
+            0%{
+                transform: translateX(0%);
+            }
+            100%{
+                transform: translateX(100%);
+            }
+        }
+        .fadeout{
+            animation: fadeout ease-in 1000ms forwards;
+            }
+
+        @keyframes fadeout {
+            100% {
+               opacity: 0;
+            }
+        }
+
         #map {
             position: absolute;
             top: 0;
@@ -33,12 +162,6 @@
             top: 0;
             z-index: 0;
             width: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Ubuntu;
         }
 
         .title {
@@ -67,10 +190,18 @@
             border-radius: 20px;
             color: white;
             text-shadow: 2px 2px 4px black;
+            transition-duration: 500ms;
+        }
+        .data:hover{
+            background-color: rgba(100, 100, 100, 0.8);
+            transition-duration: 500ms;
         }
 
         .data table {
             --color-1: rgba(255, 153, 0, 0.6);
+        }
+        .data table:hover{
+            --color-1: rgba(255, 153, 0, 0.9);
         }
 
         caption {
@@ -109,6 +240,26 @@
 
 <body>
 
+    <script>
+//        window.onload = function() { // también puede usar window.addEventListener('load', (event) => {
+        function start(){
+            document.getElementsByClassName("intro")[0].classList.add("fadeout");
+            setTimeout( function (){
+                document.getElementsByClassName("intro")[0].style.display = "none";
+                }, 1000);
+        };
+        
+      </script>
+
+    <div class="intro">
+        <div class="sky"></div>
+        <div class="cloud"></div>
+        <div class="sea">
+            <div class="seafoam"></div>
+        </div>
+        <div class="sand"></div>
+        <div class="boat" onclick="start()"></div>
+    </div>
     <div class="container">
         <div id="map"> </div>
         <script>
